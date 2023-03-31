@@ -152,9 +152,10 @@ fn graph(tage: i32) {
     
     //giving the output a height of 10 
     //starting at the bottom (rev) so that the highest number has the highest pillar (not upside down)
-
     open_unten_rahmen(tage);
 
+    //call the read function to init the vec variable
+    //PERFORMANCE!
     let vec = read::main(tage);
 
     for zeile in (1..=10).rev() {
