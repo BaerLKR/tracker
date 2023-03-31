@@ -129,7 +129,8 @@ pub fn tagesauswahl() {
                         if read::linecount() > breite as i32 / 2 {
                             graph(breite as i32 / 3);
                         } else {
-                            graph(read::linecount() / 2);
+                            println!("line {}", read::linecount());
+                            graph(read::linecount());
                         }
                     } else {
                         //if it is any other number do it the normal way
