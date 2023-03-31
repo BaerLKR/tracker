@@ -126,10 +126,10 @@ pub fn tagesauswahl() {
                         //use the smaller value
                         //between the line number of the file and the width of the terminal
                         //-> no overflow
-                        if read::linecount() > breite as i32 {
+                        if read::linecount() > breite as i32 / 2 {
                             graph(breite as i32 / 3);
                         } else {
-                            graph(read::linecount());
+                            graph(read::linecount() / 2);
                         }
                     } else {
                         //if it is any other number do it the normal way
