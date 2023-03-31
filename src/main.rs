@@ -225,7 +225,7 @@ fn help() {
     println!("Form the initial prompt, you can choose to show the log of the progress you tracked in a graph (choose the 1), or to add an entry (choose the 2).");
     println!("");
     println!("Colors: (from good to bad)");
-    for n in 1..=10 {
+    for n in (1..=10).rev() {
         print!("{n:2} ");
     }
     print!("\n");

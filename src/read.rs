@@ -4,9 +4,7 @@ use std::io::BufReader;
 use colored::*;
 use rev_lines::RevLines;
 use std::env;
-// use std::io;
 use std::io::{stdin, Write, BufRead};
-// use dirs::*;
 
 use crate::tagesauswahl;
 
