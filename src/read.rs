@@ -5,7 +5,7 @@ use colored::*;
 use rev_lines::RevLines;
 use std::env;
 // use std::io;
-use std::io::{stdin, Write};
+use std::io::{stdin, Write, BufRead};
 // use dirs::*;
 
 use crate::tagesauswahl;
@@ -33,6 +33,7 @@ pub fn main(tage: i32) -> Vec<i32> {
 
     //add the individual values to the vector
     for line in rev_lines.take(cap) {
+        // let number: i32 = line.parse().unwrap();
         let number: i32 = line.parse().unwrap();
         numbers.push(number);
     }
@@ -89,4 +90,22 @@ pub fn add() {
             }
         }
     }
+}
+
+pub fn linecount() -> i32 {
+    // read the commandline argument (the file path)
+    let args: Vec<String> = env::args().collect();
+
+    let q = &args[1];
+
+    let file = BufReader::new(File::open(q).expect("Unable to open file"));
+
+    let mut cnt = 0;
+
+    for _ in file.lines() {
+        cnt = cnt + 1;
+    }
+
+    //return the line number
+    cnt
 }

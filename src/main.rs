@@ -70,7 +70,7 @@ fn main() {
 pub fn tagesauswahl() {
     //prompt
     println!("");
-    println!("How many days should be displayed?");   
+    println!("How many days should be displayed (0 for the max length)?");   
 
     //read awnser
     let mut input = String::new();
@@ -120,9 +120,24 @@ pub fn tagesauswahl() {
                 } else {
                     //A row to seperate the user input from the graph
                     println!("");
+                    
+                    //if input is 0 the max possible length should be displayed
+                    if num == 0 {
+                        //use the smaller value
+                        //between the line number of the file and the width of the terminal
+                        //-> no overflow
+                        if read::linecount() > breite as i32 {
+                            graph(breite as i32 / 3);
+                        } else {
+                            graph(read::linecount());
+                        }
+                    } else {
+                        //if it is any other number do it the normal way
+                        graph(num);
+                    }
 
                     //call the graph with the number of values which should be parsed
-                    graph(num);
+                    // graph(num);
                 }
             }
         }
