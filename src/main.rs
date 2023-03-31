@@ -154,6 +154,9 @@ fn graph(tage: i32) {
     //starting at the bottom (rev) so that the highest number has the highest pillar (not upside down)
 
     open_unten_rahmen(tage);
+
+    let vec = read::main(tage);
+
     for zeile in (1..=10).rev() {
         print!("{}", " |  ".blue());
         
@@ -168,18 +171,18 @@ fn graph(tage: i32) {
 
         //looping through all the numbers in the vector
         //the vector comes from the "read.rs" file (and it's main function)
-        for stelle in (0..read::main(tage).len()).rev() {
+        for stelle in (0..vec.len()).rev() {
 
             //if the value of the current number is bigger than the number of the row
             //then print a red rectangle
-            if read::main(tage)[stelle] >= zeile {
+            if vec[stelle] >= zeile {
 
                 //burrow the value to the color function
                 farbe(&lauf);
             } else {
 
                 //if the value is 0 paint the whole collumn in black
-                if read::main(tage)[stelle] == 0 {
+                if vec[stelle] == 0 {
                     print!("{}", "  ".on_black());
 
                     //this is so that the top (not used part) is formatted correctly
