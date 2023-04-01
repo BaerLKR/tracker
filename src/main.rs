@@ -241,6 +241,8 @@ fn help() {
     println!("");
     println!("");
     println!("If a {} is given as an argument the day is marked as «not counted» and displayed as {}.", "0".bold() , "  ".on_black());
+    println!("");
+    println!("Version 1.2.2");
 }
 
 
