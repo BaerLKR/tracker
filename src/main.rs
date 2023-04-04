@@ -247,16 +247,16 @@ fn help() {
 
 fn open_unten_rahmen(tage: i32) {
     //add the left margin
-    print!("{}"," ----".blue());
-    for _n in 0..=tage {
+    print!("{}"," --------".blue());
+    for n in (0..tage).rev() {
         
         //draw as many as days
-        print!("{}", "--".blue());
+        print!("{}{n}", "-".blue());
     }
 
 
     //add right margin
-    print!("{}", "----".blue());
+    print!("{}", "--".blue());
 
     //end line
     print!("\n");
