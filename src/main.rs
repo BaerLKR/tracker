@@ -198,6 +198,38 @@ fn graph(tage: i32) {
         print!("\n");
     }
     open_unten_rahmen(tage); 
+   
+    //counters to keep track of how many were counted and what their sum is
+    let mut gesamt = 0;
+    let mut gezählt = 0;
+
+    for n in (1..vec.len()).rev() {
+
+        //only if it is not 0 (0 isn't a value, it means not counted)
+        if vec[n] != 0 {
+
+            //calc the sum
+            gesamt = gesamt + vec[n];
+
+            //add the counted
+            //here the != 0 is importand, or else one would devide by too many
+            gezählt = gezählt + 1;
+        }
+    }
+
+    //calc the average
+    let durchschnitt = gesamt / gezählt;
+
+    println!("  The average is {durchschnitt}");
+    print!("  ");
+
+    //for the color ouput the syntax is a bit different, so we need to format it like that
+    //(it counts the times looped over the main 'graph' function)
+    let farbedurchschnitt = 11 - durchschnitt;
+    farbe(&farbedurchschnitt);
+
+    //end of line to remove the return symbol
+    print!("\n");
 }
 
 fn farbe(lauf: &i32) {
@@ -244,19 +276,16 @@ fn help() {
     println!("Version 1.2.2");
 }
 
-
 fn open_unten_rahmen(tage: i32) {
     //add the left margin
-    print!("{}"," --------".blue());
-    for n in (0..tage).rev() {
-        
+    print!("{}"," ----".blue());
+    for _n in 0..=tage {
+
         //draw as many as days
-        print!("{}{n}", "-".blue());
-    }
-
-
+        print!("{}", "--".blue());
+}
     //add right margin
-    print!("{}", "--".blue());
+    print!("{}", "----".blue());
 
     //end line
     print!("\n");
