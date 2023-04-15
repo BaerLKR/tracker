@@ -294,7 +294,6 @@ fn open_unten_rahmen(tage: i32) {
 //function to check if the file path is passed as an argument
 fn chack_param() -> bool {
     let args: Vec<String> = env::args().collect();
-
     if args.len() < 2 {
         false
     } else {
