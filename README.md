@@ -6,5 +6,5 @@ Copyright (c) Lovis Rentsch 2023
 
 # Install
 ```
-git clone https://codeberg.org/baer/progress_tracker.git && cd progress_tracker && cargo build --release && sudo mv target/release/progress_tracker /usr/bin/ && cd .. && rm -rf progress_tracker && echo "Done! <3"
+git clone https://github.com/BaerLKR/tracker.git && cd tracker && cargo build --release && sudo mv target/release/tracker /usr/bin/ && cd .. && rm -rf tracker && echo "Done! <3"
 ```
