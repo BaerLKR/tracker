@@ -218,15 +218,15 @@ fn graph(tage: i32) {
     }
 
     //calc the average
-    let durchschnitt = gesamt / gezählt;
-
-    println!("  The average is {durchschnitt}");
-    print!("  ");
-
-    //for the color ouput the syntax is a bit different, so we need to format it like that
-    //(it counts the times looped over the main 'graph' function)
-    let farbedurchschnitt = 11 - durchschnitt;
-    farbe(&farbedurchschnitt);
+    if gezählt > 0 {
+        let durchschnitt = gesamt / gezählt;
+        println!("  The average is {durchschnitt}");
+        print!("  ");
+        let farbedurchschnitt = 11 - durchschnitt;
+        farbe(&farbedurchschnitt)
+    } else {
+        println!("{}", "Please add content to your file before trying to read it".red());
+    }
 
     //end of line to remove the return symbol
     print!("\n");
