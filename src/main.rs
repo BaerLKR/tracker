@@ -96,7 +96,7 @@ fn make_file() {
             };
         },
         _ => {
-            println!("NO");
+            println!("{}", "Aborted".yellow());
         },
     };
 }
