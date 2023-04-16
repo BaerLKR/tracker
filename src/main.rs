@@ -314,7 +314,7 @@ fn help() {
     println!("");
     println!("If a {} is given as an argument the day is marked as «not counted» and displayed as {}.", "0".bold() , "  ".on_black());
     println!("");
-    println!("Version 1.2.2");
+    println!("Version 1.3.4");
 }
 
 fn open_unten_rahmen(tage: i32) {
@@ -330,6 +330,17 @@ fn open_unten_rahmen(tage: i32) {
 
     //end line
     print!("\n");
+}
+
+fn homedir() -> String {
+    let name = "HOME";
+    let home = match env::var(name) {
+        Ok(v) => {
+            v
+        }
+        Err(e) => panic!("${} is not set ({})", name, e)
+    };
+    home
 }
 
 //function to check if the file path is passed as an argument

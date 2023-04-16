@@ -9,22 +9,31 @@ use std::io::{stdin, Write, BufRead};
 // use std::error::ErrorKind;
 
 use crate::tagesauswahl;
+use crate::homedir;
 
 pub fn main(tage: i32) -> Vec<i32> {
     
     //read the commandline arument
     let args: Vec<String> = env::args().collect();
-
+    let query = if args.len() < 2 {
+        let q = format!("{}{}", homedir(), "/.tracker");
+        q
+    } else {
+        let q = match env::args().nth(0) {
+            Some(v) => v,
+            None => panic!("Error preparing file opening!"),
+        };
+        q
+    };
     //take the 2nd argument and pass it into the query variable
-    let query = &args[1];
 
     // Open the file and create a buffered BufReader
-    let file = File::open(query);
+    let file = File::open(&query);
 
     let file = match file {
         Ok(file) => file,
         Err(error) => match error.kind() {
-            ErrorKind::NotFound => match File::create(query) {
+            ErrorKind::NotFound => match File::create(&query) {
                     Ok(fc) => {
                     println!("{}", "Due to missing file a file was created.".green());
                     fc
@@ -112,10 +121,17 @@ pub fn add() {
 pub fn linecount() -> i32 {
     // read the commandline argument (the file path)
     let args: Vec<String> = env::args().collect();
-
-    let q = &args[1];
-
-    let file = BufReader::new(File::open(q).expect("Unable to open file"));
+    let query = if args.len() < 2 {
+        let q = format!("{}{}", homedir(), "/.tracker");
+        q
+    } else {
+        let q = match env::args().nth(0) {
+            Some(v) => v,
+            None => panic!("Error preparing file opening!"),
+        };
+        q
+    };
+    let file = BufReader::new(File::open(query).expect("Unable to open file"));
 
     let mut cnt = 0;
 
