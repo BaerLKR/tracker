@@ -1,10 +1,12 @@
 use std::fs::File;
 use std::fs::OpenOptions;
 use std::io::BufReader;
+use std::io::ErrorKind;
 use colored::*;
 use rev_lines::RevLines;
 use std::env;
 use std::io::{stdin, Write, BufRead};
+// use std::error::ErrorKind;
 
 use crate::tagesauswahl;
 
@@ -17,7 +19,24 @@ pub fn main(tage: i32) -> Vec<i32> {
     let query = &args[1];
 
     // Open the file and create a buffered BufReader
-    let file = File::open(query).unwrap();
+    let file = File::open(query);
+
+    let file = match file {
+        Ok(file) => file,
+        Err(error) => match error.kind() {
+            ErrorKind::NotFound => match File::create(query) {
+                    Ok(fc) => {
+                    println!("{}", "Due to missing file a file was created.".green());
+                    fc
+                },
+                    Err(error) => panic!("Error reading and creating the file: {}", error),
+            },
+            ErrorKind::Other => {
+                panic!("Unexpected error while reading file");
+            },
+            _ => panic!("Unexpected error while reading file"),
+        },
+    };
 
     //maka a usize number from the variable that was passed through
     let cap = usize::try_from(tage).unwrap();
