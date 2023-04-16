@@ -126,3 +126,7 @@ pub fn linecount() -> i32 {
     //return the line number
     cnt
 }
+
+pub fn create_file() {
+
+}

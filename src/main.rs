@@ -46,7 +46,8 @@ fn main() {
 
                 //else error
                 } else {
-                    println!("{}", "The file path must be provided as a parameter!".red());
+                    // println!("{}", "The file path must be provided as a parameter!".red());
+                    make_file();
                 }
             }
             "add" | "2" => {
@@ -54,7 +55,8 @@ fn main() {
                 if chack_param() {
                     read::add();
                 } else {
-                    println!("{}", "The file path must be provided as a parameter!".red());
+                    // println!("{}", "The file path must be provided as a parameter!".red());
+                    make_file();
                 }
             }
             _ => {
@@ -64,6 +66,33 @@ fn main() {
             }
         }
     // }
+}
+
+fn make_file() {
+    println!("{}", "No file was given. Do you want to create one? [y/N]".yellow());
+    let input = input();
+    match input.trim() {
+        "y" | "yes" | "Y" => {
+            let name = "HOME";
+            // println!("{:?}", home);
+            let home = match env::var(name) {
+                Ok(v) => {
+                    v
+                }
+                Err(e) => panic!("${} is not set ({})", name, e)
+            };
+            println!("{}{:?}{}{}", "The default path is ".yellow(), home, "/.tracker", ". Do you want to create that file?".yellow());
+        },
+        _ => {
+            println!("NO");
+        },
+    };
+}
+
+fn input() -> String {
+    let mut i = String::new();
+    io::stdin().read_line(&mut i).expect("Failed to read line!");
+    i
 }
 
 //first step of the show option
