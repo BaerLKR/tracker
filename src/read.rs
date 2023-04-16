@@ -74,7 +74,16 @@ pub fn add() {
     let args: Vec<String> = env::args().collect();
 
     //take the 2nd argument and pass it into the query variable
-    let query = &args[1];
+    let query = if args.len() < 2 {
+        let q = format!("{}{}", homedir(), "/.tracker");
+        q
+    } else {
+        let q = match env::args().nth(0) {
+            Some(v) => v,
+            None => panic!("Error preparing file opening!"),
+        };
+        q
+    };
 
     //promt
     println!("");
@@ -108,7 +117,7 @@ pub fn add() {
             if count == trimmed.len() {
 
                 //write input to file
-                    let mut file = OpenOptions::new().append(true).open(query).expect("Unable to open file"); 
+                    let mut file = OpenOptions::new().append(true).open(&query).expect("Unable to open file"); 
                     file.write_all(user_input.as_bytes()).expect("Failed to write user input!");
                     
                     //show the updated graph
