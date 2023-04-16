@@ -244,7 +244,7 @@ fn graph(tage: i32) {
     let mut gesamt = 0;
     let mut gezählt = 0;
 
-    for n in (1..vec.len()).rev() {
+    for n in (0..vec.len()).rev() {
 
         //only if it is not 0 (0 isn't a value, it means not counted)
         if vec[n] != 0 {
