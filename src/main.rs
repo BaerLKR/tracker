@@ -70,8 +70,8 @@ fn main() {
 
 fn make_file() {
     println!("{}", "No file was given. Do you want to create one? [y/N]".yellow());
-    let input = input();
-    match input.trim() {
+    let inp = input();
+    match inp.trim() {
         "y" | "yes" | "Y" => {
             let name = "HOME";
             // println!("{:?}", home);
@@ -81,7 +81,18 @@ fn make_file() {
                 }
                 Err(e) => panic!("${} is not set ({})", name, e)
             };
-            println!("{}{:?}{}{}", "The default path is ".yellow(), home, "/.tracker", ". Do you want to create that file?".yellow());
+            println!("{}{:?}{}{}", "The default path is ".yellow(), home, "/.tracker", ". Do you want to create that file? [Y/n]".yellow());
+           let awnser = input();
+            match awnser.trim() {
+                "n" | "N" | "no" => {
+                    let path = input();
+                    read::create_file(path);
+                }
+                _ => {
+                    let h = format!("{}{}", home, "/.tracker");
+                    read::create_file(h);
+                },
+            };
         },
         _ => {
             println!("NO");

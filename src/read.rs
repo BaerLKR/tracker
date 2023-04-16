@@ -127,6 +127,25 @@ pub fn linecount() -> i32 {
     cnt
 }
 
-pub fn create_file() {
+pub fn create_file(path: String) {
+    let file = File::open(&path);
 
+    let file = match file {
+        Ok(file) => {
+            println!("{}", "File already exists, opeing...".yellow());
+            file
+        },
+        Err(error) => match error.kind() {
+            ErrorKind::NotFound => match File::create(&path) {
+                    Ok(fc) => {
+                    fc
+                },
+                    Err(error) => panic!("Error reading and creating the file: {}", error),
+            },
+            ErrorKind::Other => {
+                panic!("Unexpected error while reading file");
+            },
+            _ => panic!("Unexpected error while reading file"),
+        },
+    };
 }
