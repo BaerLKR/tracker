@@ -22,6 +22,7 @@ use std::io;
 use colored::*;
 use termsize;
 use std::env;
+use std::fs::File;
 
 fn main() {
     //prompt
@@ -335,7 +336,27 @@ fn open_unten_rahmen(tage: i32) {
 fn chack_param() -> bool {
     let args: Vec<String> = env::args().collect();
     if args.len() < 2 {
-        false
+        let name = "HOME";
+        let home = match env::var(name) {
+            Ok(v) => {
+                v
+            }
+            Err(e) => panic!("${} is not set ({})", name, e)
+        };
+        let h = format!("{}{}", home, "/.tracker");
+        let tracker_check = match File::open(h) {
+            Ok(_) => {
+                true
+            },
+            Err(_) => {
+                false
+            },
+        };
+        if tracker_check {
+            true
+        } else {
+            false
+        }
     } else {
         true
     }
