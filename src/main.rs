@@ -297,6 +297,7 @@ fn help() {
     println!("");
     println!("It is required to pass the path to the file that should be read as a commandline argument.");
     println!("  {}" ,"./tracker /home/example/log.txt".on_black().yellow());
+    println!("Or else the program will create a file at ~/.tracker and default to that file when running wihtout arument.");
     println!("Like that it is possible to track multiple different things by distributing them into different files.");
     println!("");
     println!("Form the initial prompt, you can choose to show the log of the progress you tracked in a graph (choose the 1), or to add an entry (choose the 2).");
@@ -314,7 +315,7 @@ fn help() {
     println!("");
     println!("If a {} is given as an argument the day is marked as «not counted» and displayed as {}.", "0".bold() , "  ".on_black());
     println!("");
-    println!("Version 1.3.4");
+    println!("Version 1.3.7");
 }
 
 fn open_unten_rahmen(tage: i32) {
